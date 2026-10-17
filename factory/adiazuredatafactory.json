@@ -1,0 +1,15 @@
+{
+	"name": "adiazuredatafactory",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "ab1d6d7a-28b6-4c0a-93e6-42fb8b3ae635",
+		"tenantId": "99c1d874-8937-49cd-9f6d-0e455ba0c32d"
+	}
+}

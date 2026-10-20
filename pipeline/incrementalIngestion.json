@@ -15,15 +15,25 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
+				"userProperties": [],
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select * from @(pipeline().parameters.schema).@(pipeline().parameters.table) where @(pipeline().parameters.cdc_col)>",
+							"value": "select * from(@pipeline().parameters.schema).(@pipeline().parameters.table) where @pipeline().parameters.cdc_col > '1';",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
 					},
 					"enableStaging": false
 				},
@@ -31,6 +41,17 @@
 					{
 						"referenceName": "AzureSqlTable1",
 						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Json1",
+						"type": "DatasetReference",
+						"parameters": {
+							"container": "bronze",
+							"folder": "cdc",
+							"file": "cdc.json"
+						}
 					}
 				]
 			},
@@ -67,22 +88,22 @@
 							"file": "cdc.json"
 						}
 					},
-					"firstRowOnly": false
+					"firstRowOnly": true
 				}
 			}
 		],
 		"parameters": {
 			"schema": {
 				"type": "string",
-				"defaultValue": "bronze"
+				"defaultValue": "dbo"
 			},
 			"table": {
 				"type": "string",
-				"defaultValue": "cdc"
+				"defaultValue": "your_table"
 			},
 			"cdc_col": {
 				"type": "string",
-				"defaultValue": "cdc.json"
+				"defaultValue": "LastModifiedDate"
 			}
 		},
 		"annotations": []

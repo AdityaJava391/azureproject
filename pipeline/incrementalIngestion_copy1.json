@@ -6,11 +6,7 @@
 				"name": "ForEachDataLoading",
 				"type": "ForEach",
 				"dependsOn": [],
-				"userProperties": [
-					{
-						"name": ""
-					}
-				],
+				"userProperties": [],
 				"typeProperties": {
 					"items": {
 						"value": "@pipeline().parameters.loop_input",
@@ -132,7 +128,7 @@
 										"file": "cdc.json"
 									}
 								},
-								"firstRowOnly": true
+								"firstRowOnly": false
 							}
 						},
 						{
